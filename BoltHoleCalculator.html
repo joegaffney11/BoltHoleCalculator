@@ -13,109 +13,138 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #1e1e2e;
+            background: linear-gradient(135deg, #1e1e2e, #2d1b69);
             color: #f3f4f6;
             line-height: 1.6;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: #2a2a3a;
-            border-radius: 20px;
-            padding: 20px;
+            background: linear-gradient(145deg, #2a2a3a, #323247);
+            border-radius: 25px;
+            padding: 25px;
             min-height: calc(100vh - 40px);
             display: flex;
             flex-direction: column;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .header {
             text-align: center;
             margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            border-radius: 15px;
+            padding: 25px;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6, #1d4ed8);
+            border-radius: 20px;
             color: white;
+            box-shadow: 
+                0 15px 35px rgba(59, 130, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
-            font-size: 2em;
+            font-size: clamp(1.8em, 4vw, 2.2em);
             margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header p {
-            font-size: 1.1em;
+            font-size: clamp(1em, 2.5vw, 1.1em);
             opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .main-content {
             display: grid;
             grid-template-columns: 400px 1fr;
-            gap: 20px;
+            gap: 25px;
             flex: 1;
             min-height: 0;
         }
 
         .control-panel {
-            background: #35354a;
-            border-radius: 15px;
-            padding: 20px;
+            background: linear-gradient(145deg, #35354a, #3f3f57);
+            border-radius: 20px;
+            padding: 25px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .visualization-panel {
-            background: #35354a;
-            border-radius: 15px;
-            padding: 20px;
+            background: linear-gradient(145deg, #35354a, #3f3f57);
+            border-radius: 20px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             min-height: 0;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .card {
-            background: #2a2a3a;
-            border-radius: 10px;
-            padding: 15px;
+            background: linear-gradient(145deg, #2a2a3a, #36364d);
+            border-radius: 15px;
+            padding: 20px;
             margin-bottom: 20px;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .card h3 {
             color: #60a5fa;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-size: clamp(1.1em, 2.5vw, 1.3em);
             border-bottom: 2px solid #60a5fa;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .input-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .input-row label {
             color: #d1d5db;
             font-weight: 500;
+            font-size: clamp(0.9em, 2vw, 1em);
         }
 
         .input-row input {
-            background: #1e1e2e;
+            background: linear-gradient(145deg, #1e1e2e, #252539);
             border: 1px solid #4b5563;
-            border-radius: 8px;
-            padding: 8px 12px;
+            border-radius: 10px;
+            padding: 10px 15px;
             color: #f3f4f6;
-            width: 120px;
-            font-size: 14px;
+            width: 130px;
+            font-size: clamp(13px, 2vw, 14px);
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         .input-row input:focus {
             outline: none;
             border-color: #60a5fa;
-            box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 0 3px rgba(96, 165, 250, 0.2),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
 
         .positions-grid {
@@ -126,32 +155,36 @@
         }
 
         .hole-inputs {
-            background: #1e1e2e;
-            border-radius: 8px;
-            padding: 12px;
+            background: linear-gradient(145deg, #1e1e2e, #252539);
+            border-radius: 12px;
+            padding: 15px;
             border: 1px solid #4b5563;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .hole-inputs h4 {
             color: #60a5fa;
-            margin-bottom: 10px;
-            font-size: 1em;
+            margin-bottom: 12px;
+            font-size: clamp(0.95em, 2vw, 1.1em);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .hole-inputs .coordinate-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
         .coordinate-inputs div {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
         }
 
         .coordinate-inputs label {
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             color: #9ca3af;
         }
 
@@ -161,68 +194,186 @@
 
         .canvas-container {
             height: 450px;
-            background: #1e1e2e;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: linear-gradient(145deg, #1e1e2e, #252539);
+            border-radius: 15px;
+            margin-bottom: 20px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            box-shadow: 
+                inset 0 5px 10px rgba(0, 0, 0, 0.4),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         #visualization {
-            border-radius: 10px;
+            border-radius: 12px;
             max-width: 100%;
             max-height: 100%;
         }
 
         .results-container {
             flex: 1;
-            background: #1e1e2e;
-            border-radius: 10px;
-            padding: 15px;
+            background: linear-gradient(145deg, #1e1e2e, #252539);
+            border-radius: 15px;
+            padding: 20px;
             overflow-y: auto;
-            min-height: 200px;
+            min-height: 300px;
+            box-shadow: 
+                inset 0 5px 10px rgba(0, 0, 0, 0.4),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .results-container h3 {
             color: #10b981;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-size: clamp(1.1em, 2.5vw, 1.3em);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
-        .results-text {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            line-height: 1.4;
-            white-space: pre-wrap;
-            color: #d1d5db;
+        .results-summary {
+            background: linear-gradient(145deg, #059669, #10b981);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 
+                0 8px 16px rgba(16, 185, 129, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
+
+        .results-summary h4 {
+            color: white;
+            font-size: clamp(1em, 2.2vw, 1.1em);
+            margin-bottom: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .summary-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .summary-item .label {
+            font-size: clamp(0.8em, 1.8vw, 0.85em);
+            opacity: 0.8;
+        }
+
+        .summary-item .value {
+            font-size: clamp(1em, 2.2vw, 1.1em);
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .data-tables {
+            display: grid;
+            gap: 15px;
+        }
+
+        .data-table {
+            background: linear-gradient(145deg, #2a2a3a, #36364d);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .table-header {
+            color: #60a5fa;
+            font-size: clamp(0.95em, 2vw, 1em);
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .table-content {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.75em, 1.8vw, 0.85em);
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        th {
+            background: linear-gradient(145deg, #4b5563, #6b7280);
+            color: #f3f4f6;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        td {
+            background: linear-gradient(145deg, #374151, #4b5563);
+            color: #d1d5db;
+            transition: all 0.2s ease;
+        }
+
+        tr:hover td {
+            background: linear-gradient(145deg, #4b5563, #6b7280);
+            color: #f3f4f6;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .nominal-row td { border-left: 3px solid #3b82f6; }
+        .actual-row td { border-left: 3px solid #ef4444; }
+        .optimized-row td { border-left: 3px solid #10b981; }
 
         .legend {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(42, 42, 58, 0.9);
-            border: 1px solid #4b5563;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 12px;
+            background: linear-gradient(145deg, rgba(42, 42, 58, 0.95), rgba(53, 53, 74, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: clamp(11px, 2vw, 12px);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .legend-color {
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
             border: 2px solid #f3f4f6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .rotation-info {
@@ -230,36 +381,62 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(42, 42, 58, 0.9);
-            border: 1px solid #4b5563;
-            border-radius: 8px;
-            padding: 8px 12px;
+            background: linear-gradient(145deg, rgba(96, 165, 250, 0.9), rgba(59, 130, 246, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 10px 15px;
             font-weight: bold;
-            color: #60a5fa;
+            color: white;
+            font-size: clamp(0.8em, 2vw, 0.9em);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 8px 16px rgba(96, 165, 250, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
-            @media (max-width: 768px) {
-                .main-content {
-                    grid-template-columns: 1fr;
-                    height: auto;
-                }
-                
-                .container {
-                    padding: 10px;
-                }
-                
-                .header h1 {
-                    font-size: 1.5em;
-                }
-
-                .canvas-container {
-                    height: 300px;
-                }
-
-                .results-container {
-                    height: 200px;
-                }
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                height: auto;
             }
+            
+            .container {
+                padding: 15px;
+            }
+
+            .canvas-container {
+                height: 300px;
+            }
+
+            .results-container {
+                min-height: 250px;
+            }
+
+            .summary-values {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.7em;
+            }
+
+            th, td {
+                padding: 6px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .input-row {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .input-row input {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -319,8 +496,24 @@
 
                 <div class="results-container">
                     <h3>📋 Results</h3>
-                    <div id="resultsText" class="results-text">
-                        Enter values to see optimization results...
+                    <div id="resultsContent">
+                        <div class="results-summary">
+                            <h4>🎯 Optimization Summary</h4>
+                            <div class="summary-values">
+                                <div class="summary-item">
+                                    <div class="label">Optimal Rotation</div>
+                                    <div class="value" id="optimalRotation">0.0000°</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="label">Max Distance</div>
+                                    <div class="value" id="maxDistance">0.0000</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-tables" id="dataTables">
+                            <!-- Tables will be generated here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -362,22 +555,18 @@
             resizeCanvas() {
                 const container = this.canvas.parentElement;
                 
-                // Use fixed dimensions for consistency
                 const displayWidth = Math.floor(container.clientWidth - 40);
                 const displayHeight = Math.floor(container.clientHeight - 40);
                 
-                // Set the internal size to match the display size
                 this.canvas.width = displayWidth;
                 this.canvas.height = displayHeight;
                 
-                // Make it visually sharp on high DPI displays
                 const dpr = window.devicePixelRatio || 1;
                 this.canvas.width = displayWidth * dpr;
                 this.canvas.height = displayHeight * dpr;
                 this.canvas.style.width = displayWidth + 'px';
                 this.canvas.style.height = displayHeight + 'px';
                 
-                // Scale the drawing context
                 this.ctx.scale(dpr, dpr);
                 
                 if (this.xNominal) this.drawVisualization();
@@ -466,7 +655,12 @@
                     this.drawVisualization();
 
                 } catch (error) {
-                    document.getElementById('resultsText').textContent = `❌ Error: ${error.message}`;
+                    document.getElementById('resultsContent').innerHTML = `
+                        <div style="text-align: center; color: #ef4444; padding: 20px;">
+                            <h4>❌ Error</h4>
+                            <p>${error.message}</p>
+                        </div>
+                    `;
                 }
             }
 
@@ -474,7 +668,6 @@
                 let bestAngle = 0;
                 let minDistance = Infinity;
                 
-                // Search in 0.1 degree increments for initial scan
                 for (let angle = 0; angle < 360; angle += 0.1) {
                     const distance = this.calculateMaxDistance(angle);
                     if (distance < minDistance) {
@@ -483,7 +676,6 @@
                     }
                 }
                 
-                // Refine search around best angle
                 const searchRange = 1.0;
                 const step = 0.001;
                 for (let angle = bestAngle - searchRange; angle <= bestAngle + searchRange; angle += step) {
@@ -519,24 +711,139 @@
             }
 
             displayResults() {
-                const formatList = (list) => list.map(x => x.toFixed(4)).join(', ');
-                
-                let results = `🎯 Optimization Result\n${'='.repeat(50)}\n`;
-                results += `✅ Optimal Rotation: ${this.optimalAngle.toFixed(4)}°\n`;
-                results += `   Alternative: ${(this.optimalAngle - 360).toFixed(4)}°\n`;
-                results += `🎯 Max Distance: ${this.minMaxDistance.toFixed(4)}\n\n`;
-                
-                results += `📊 Detailed Analysis\n${'-'.repeat(50)}\n`;
-                results += `🔵 Nominal Positions (X):\n  [${formatList(this.xNominal)}]\n\n`;
-                results += `🔵 Nominal Positions (Y):\n  [${formatList(this.yNominal)}]\n\n`;
-                results += `🔴 Actual Positions (X):\n  [${formatList(this.xActual)}]\n\n`;
-                results += `🔴 Actual Positions (Y):\n  [${formatList(this.yActual)}]\n\n`;
-                results += `🟢 Optimized Positions (X):\n  [${formatList(this.xOptimized)}]\n\n`;
-                results += `🟢 Optimized Positions (Y):\n  [${formatList(this.yOptimized)}]\n`;
+                // Update summary
+                document.getElementById('optimalRotation').textContent = `${this.optimalAngle.toFixed(4)}°`;
+                document.getElementById('maxDistance').textContent = this.minMaxDistance.toFixed(4);
 
-                document.getElementById('resultsText').textContent = results;
+                // Create tables
+                const tablesContainer = document.getElementById('dataTables');
+                
+                // Position comparison table
+                const posTable = this.createPositionTable();
+                
+                // Distance analysis table
+                const distTable = this.createDistanceTable();
+
+                tablesContainer.innerHTML = `
+                    <div class="data-table">
+                        <div class="table-header">🎯 Position Comparison</div>
+                        <div class="table-content">${posTable}</div>
+                    </div>
+                    <div class="data-table">
+                        <div class="table-header">📏 Distance Analysis</div>
+                        <div class="table-content">${distTable}</div>
+                    </div>
+                `;
+
                 document.getElementById('rotationInfo').textContent = 
                     `🔄 Rotation: ${this.optimalAngle.toFixed(4)}° (Alt: ${(this.optimalAngle - 360).toFixed(4)}°)`;
+            }
+
+            createPositionTable() {
+                let table = '<table><thead><tr><th>Hole</th>';
+                for (let i = 1; i <= this.boltHoles; i++) {
+                    table += `<th>Hole ${i}</th>`;
+                }
+                table += '</tr></thead><tbody>';
+
+                // Nominal X
+                table += '<tr class="nominal-row"><td>🔵 Nominal X</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.xNominal[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Nominal Y
+                table += '<tr class="nominal-row"><td>🔵 Nominal Y</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.yNominal[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Actual X
+                table += '<tr class="actual-row"><td>🔴 Actual X</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.xActual[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Actual Y
+                table += '<tr class="actual-row"><td>🔴 Actual Y</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.yActual[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Optimized X
+                table += '<tr class="optimized-row"><td>🟢 Optimized X</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.xOptimized[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Optimized Y
+                table += '<tr class="optimized-row"><td>🟢 Optimized Y</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${this.yOptimized[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                table += '</tbody></table>';
+                return table;
+            }
+
+            createDistanceTable() {
+                let table = '<table><thead><tr><th>Hole</th>';
+                for (let i = 1; i <= this.boltHoles; i++) {
+                    table += `<th>Hole ${i}</th>`;
+                }
+                table += '</tr></thead><tbody>';
+
+                // Calculate distances for each hole
+                const actualDistances = [];
+                const optimizedDistances = [];
+
+                for (let i = 0; i < this.boltHoles; i++) {
+                    // Distance from nominal to actual
+                    const actualDist = 2 * Math.sqrt(
+                        Math.pow(this.xNominal[i] - this.xActual[i], 2) + 
+                        Math.pow(this.yNominal[i] - this.yActual[i], 2)
+                    );
+                    actualDistances.push(actualDist);
+
+                    // Distance from nominal to optimized
+                    const optimizedDist = 2 * Math.sqrt(
+                        Math.pow(this.xNominal[i] - this.xOptimized[i], 2) + 
+                        Math.pow(this.yNominal[i] - this.yOptimized[i], 2)
+                    );
+                    optimizedDistances.push(optimizedDist);
+                }
+
+                // Actual distances
+                table += '<tr class="actual-row"><td>🔴 Actual Distance</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${actualDistances[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Optimized distances
+                table += '<tr class="optimized-row"><td>🟢 Optimized Distance</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    table += `<td>${optimizedDistances[i].toFixed(4)}</td>`;
+                }
+                table += '</tr>';
+
+                // Improvement
+                table += '<tr style="background: linear-gradient(145deg, #065f46, #059669);"><td style="color: white; font-weight: bold;">💡 Improvement</td>';
+                for (let i = 0; i < this.boltHoles; i++) {
+                    const improvement = actualDistances[i] - optimizedDistances[i];
+                    const improvementPercent = ((improvement / actualDistances[i]) * 100);
+                    table += `<td style="color: white; font-weight: bold;">${improvement.toFixed(4)}<br><small>(${improvementPercent.toFixed(1)}%)</small></td>`;
+                }
+                table += '</tr>';
+
+                table += '</tbody></table>';
+                return table;
             }
 
             drawVisualization() {
