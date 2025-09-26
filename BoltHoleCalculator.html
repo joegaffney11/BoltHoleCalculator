@@ -451,7 +451,7 @@
                 <div class="card">
                     <h3>🔧 Basic Parameters</h3>
                     <div class="input-row">
-                        <label>Number of Bolt Holes:</label>
+                        <label>Number of Bolt Holes (Equidistant):</label>
                         <input type="number" id="boltHoles" value="3" min="1" max="20">
                     </div>
                     <div class="input-row">
@@ -916,21 +916,21 @@
                     this.ctx.strokeStyle = '#f3f4f6';
                     this.ctx.lineWidth = 2;
                     this.ctx.beginPath();
-                    this.ctx.arc(cxNom, cyNom, 8, 0, 2 * Math.PI);
+                    this.ctx.arc(cxNom, cyNom, 4, 0, 2 * Math.PI);
                     this.ctx.fill();
                     this.ctx.stroke();
 
                     // Actual (red)
                     this.ctx.fillStyle = '#ef4444';
                     this.ctx.beginPath();
-                    this.ctx.arc(cxAct, cyAct, 8, 0, 2 * Math.PI);
+                    this.ctx.arc(cxAct, cyAct, 4, 0, 2 * Math.PI);
                     this.ctx.fill();
                     this.ctx.stroke();
 
                     // Optimized (green)
                     this.ctx.fillStyle = '#10b981';
                     this.ctx.beginPath();
-                    this.ctx.arc(cxOpt, cyOpt, 8, 0, 2 * Math.PI);
+                    this.ctx.arc(cxOpt, cyOpt, 4, 0, 2 * Math.PI);
                     this.ctx.fill();
                     this.ctx.stroke();
 
