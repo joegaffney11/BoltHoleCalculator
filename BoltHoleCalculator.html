@@ -1102,8 +1102,6 @@
                         <h5>Hole ${result.holeNumber}</h5>
                         ${visual}
                         <div class="tolerance-stats">
-                            <div>Dev: ${result.deviationAfter.toFixed(4)}</div>
-                            <div>Tol: ${result.availableTolerance.toFixed(4)}</div>
                             <div class="status ${result.passesAfter ? 'pass' : 'fail'}">
                                 ${result.passesAfter ? '✓ PASS' : '✗ FAIL'}
                             </div>
@@ -1152,7 +1150,7 @@
                 let positionScale = toleranceRadiusDisplay / safeTolerance;
                 
                 // Only limit scaling for very small tolerances
-                if (safeTolerance < 0.001) {
+                if (safeTolerance < 0.0001) {
                     const maxScale = 1000;
                     positionScale = Math.min(positionScale, maxScale);
                 }
