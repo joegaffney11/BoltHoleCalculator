@@ -289,7 +289,7 @@
 
         .coordinate-inputs label {
             font-size: clamp(11px, 2vw, 12px);
-            color: #9ca3af;
+            color: #d1d5db;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -297,6 +297,7 @@
             min-height: 2.4em;
             display: flex;
             align-items: flex-end;
+            font-weight: 500;
         }
 
         .coordinate-inputs input {
@@ -1183,7 +1184,7 @@
                 ctx.lineTo(centerX, visualSize);
                 ctx.stroke();
                 
-                // Draw tolerance circle
+                // Draw tolerance circle (keeping this one for hole-by-hole visualization)
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
                 ctx.setLineDash([3, 3]);
                 ctx.lineWidth = 2;
@@ -1442,10 +1443,10 @@
                 // Draw grid
                 this.drawGrid(centerX, centerY, scale, maxR, displayWidth, displayHeight);
 
-                // Draw bolt circle
+                // Draw bolt circle (solid line instead of dashed)
                 const circleR = (this.bcd / 2) * scale;
                 this.ctx.strokeStyle = '#6b7280';
-                this.ctx.setLineDash([10, 10]);
+                this.ctx.setLineDash([]);
                 this.ctx.lineWidth = 2;
                 this.ctx.beginPath();
                 this.ctx.arc(centerX, centerY, circleR, 0, 2 * Math.PI);
@@ -1471,29 +1472,18 @@
                     const cxOpt = centerX + (0.5 * this.bcd * Math.cos(rotatedAngle * Math.PI / 180)) * scale;
                     const cyOpt = centerY - (0.5 * this.bcd * Math.sin(rotatedAngle * Math.PI / 180)) * scale;
 
-                    // Draw tolerance circle around optimized position
-                    const toleranceRadius = this.getAvailableTolerance(i) * scale / 2;
-                    this.ctx.strokeStyle = this.holeResults[i].passesAfter ? '#10b981' : '#ef4444';
-                    this.ctx.setLineDash([5, 5]);
-                    this.ctx.lineWidth = 2;
-                    this.ctx.globalAlpha = 0.6;
-                    this.ctx.beginPath();
-                    this.ctx.arc(cxOpt, cyOpt, toleranceRadius, 0, 2 * Math.PI);
-                    this.ctx.stroke();
-                    this.ctx.globalAlpha = 1;
-
-                    // Draw rotation arrow (actual to optimized nominal)
+                    // Draw rotation arrow (actual to optimized nominal) - solid line
                     this.ctx.strokeStyle = '#f59e0b';
-                    this.ctx.setLineDash([5, 5]);
+                    this.ctx.setLineDash([]);
                     this.ctx.lineWidth = 2;
                     this.ctx.beginPath();
                     this.ctx.moveTo(cxNom, cyNom);
                     this.ctx.lineTo(cxOpt, cyOpt);
                     this.ctx.stroke();
 
-                    // Draw connection line (optimized nominal to actual)
+                    // Draw connection line (optimized nominal to actual) - solid line
                     this.ctx.strokeStyle = this.holeResults[i].passesAfter ? '#10b981' : '#ef4444';
-                    this.ctx.setLineDash([2, 4]);
+                    this.ctx.setLineDash([]);
                     this.ctx.lineWidth = 1;
                     this.ctx.beginPath();
                     this.ctx.moveTo(cxOpt, cyOpt);
