@@ -29,9 +29,7 @@
             min-height: calc(100vh - 40px);
             display: flex;
             flex-direction: column;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .header {
@@ -41,9 +39,7 @@
             background: linear-gradient(135deg, #60a5fa, #3b82f6, #1d4ed8);
             border-radius: 20px;
             color: white;
-            box-shadow: 
-                0 15px 35px rgba(59, 130, 246, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
@@ -66,40 +62,25 @@
             min-height: 0;
         }
 
-        .control-panel {
+        .panel {
             background: linear-gradient(145deg, #35354a, #3f3f57);
             border-radius: 20px;
             padding: 25px;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .control-panel {
+            overflow-y: auto;
         }
 
         .visualization-panel {
-            background: linear-gradient(145deg, #35354a, #3f3f57);
-            border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
             min-height: 0;
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .results-panel {
-            background: linear-gradient(145deg, #35354a, #3f3f57);
-            border-radius: 20px;
-            padding: 25px;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .card {
@@ -107,9 +88,7 @@
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -144,28 +123,20 @@
             color: #f3f4f6;
             width: 130px;
             font-size: clamp(13px, 2vw, 14px);
-            box-shadow: 
-                inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
         .input-row input:focus, .input-row select:focus {
             outline: none;
             border-color: #60a5fa;
-            box-shadow: 
-                inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                0 0 0 3px rgba(96, 165, 250, 0.2),
-                0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(96, 165, 250, 0.2), 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(-1px);
         }
 
         .input-row input.error {
             border-color: #ef4444;
-            box-shadow: 
-                inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                0 0 0 3px rgba(239, 68, 68, 0.3),
-                0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(239, 68, 68, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .error-message {
@@ -197,38 +168,18 @@
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 
-                0 8px 16px rgba(16, 185, 129, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .mmc-button:hover {
             transform: translateY(-2px);
-            box-shadow: 
-                0 12px 20px rgba(16, 185, 129, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .mmc-button.disabled {
-            background: linear-gradient(145deg, #059669, #10b981);
-            box-shadow: 
-                0 8px 16px rgba(16, 185, 129, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .mmc-button.disabled:hover {
-            box-shadow: 
-                0 12px 20px rgba(16, 185, 129, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 20px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .mmc-settings {
             transition: all 0.3s ease;
             overflow: hidden;
-        }
-
-        .mmc-settings.hidden {
             max-height: 0;
             opacity: 0;
             margin-bottom: 0;
@@ -262,9 +213,7 @@
             border-radius: 12px;
             padding: 15px;
             border: 1px solid #4b5563;
-            box-shadow: 
-                inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .hole-inputs h4 {
@@ -274,7 +223,7 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        .hole-inputs .coordinate-inputs {
+        .coordinate-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
@@ -304,21 +253,6 @@
             width: 100%;
         }
 
-        .diameter-inputs {
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .diameter-inputs.hidden {
-            max-height: 0;
-            opacity: 0;
-        }
-
-        .diameter-inputs.visible {
-            max-height: 100px;
-            opacity: 1;
-        }
-
         .canvas-container {
             height: 350px;
             background: linear-gradient(145deg, #1e1e2e, #252539);
@@ -329,9 +263,7 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 
-                inset 0 5px 10px rgba(0, 0, 0, 0.4),
-                0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -347,17 +279,13 @@
             padding: 15px;
             margin-bottom: 20px;
             text-align: center;
-            box-shadow: 
-                0 8px 16px rgba(16, 185, 129, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
 
         .results-summary.fail {
             background: linear-gradient(145deg, #dc2626, #ef4444);
-            box-shadow: 
-                0 8px 16px rgba(220, 38, 38, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .results-summary h4 {
@@ -391,12 +319,7 @@
             font-size: clamp(1em, 2.2vw, 1.1em);
             font-weight: bold;
             color: white;
-            text-shadow: 
-                0 1px 2px rgba(0, 0, 0, 0.3),
-                -1px -1px 0 #000,
-                1px -1px 0 #000,
-                -1px 1px 0 #000,
-                1px 1px 0 #000;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         }
 
         .tolerance-indicators {
@@ -411,9 +334,7 @@
             border-radius: 12px;
             padding: 15px;
             text-align: center;
-            box-shadow: 
-                0 8px 16px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -461,9 +382,7 @@
             background: linear-gradient(145deg, #2a2a3a, #36364d);
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 
-                0 8px 16px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -534,9 +453,7 @@
             border-radius: 12px;
             padding: 15px;
             font-size: clamp(11px, 2vw, 12px);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
 
@@ -568,9 +485,7 @@
             color: white;
             font-size: clamp(0.8em, 2vw, 0.9em);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            box-shadow: 
-                0 8px 16px rgba(96, 165, 250, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 16px rgba(96, 165, 250, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
         }
 
@@ -616,7 +531,7 @@
         </div>
 
         <div class="main-content">
-            <div class="control-panel">
+            <div class="panel control-panel">
                 <div class="card">
                     <h3>🔧 Basic Parameters</h3>
                     <div class="input-row">
@@ -639,7 +554,7 @@
                     <div class="mmc-toggle">
                         <button id="mmcButton" class="mmc-button">Enable MMC</button>
                     </div>
-                    <div id="mmcSettings" class="mmc-settings hidden">
+                    <div id="mmcSettings" class="mmc-settings">
                         <div class="input-row">
                             <label>Max Diameter Tolerance:</label>
                             <input type="number" id="maxDiameterTol" value="0.505" step="0.001">
@@ -659,7 +574,7 @@
                 </div>
             </div>
 
-            <div class="visualization-panel">
+            <div class="panel visualization-panel">
                 <div class="results-summary">
                     <h4>🎯 Analysis Summary</h4>
                     <div class="summary-values">
@@ -704,7 +619,7 @@
                 </div>
             </div>
 
-            <div class="results-panel">
+            <div class="panel results-panel">
                 <h3>📊 True Position Analysis</h3>
                 
                 <div id="toleranceIndicators" class="tolerance-indicators">
@@ -772,7 +687,6 @@
                 if (isNaN(value) || value < 0.0001) {
                     input.classList.add('error');
                     errorDiv.style.display = 'block';
-                    // Don't auto-correct, just show error
                     return;
                 } else {
                     input.classList.remove('error');
@@ -794,7 +708,6 @@
                     return;
                 }
 
-                // Check if any hole diameter exceeds this value
                 let maxHoleDiameter = 0;
                 for (let i = 0; i < this.actualDiameters.length; i++) {
                     maxHoleDiameter = Math.max(maxHoleDiameter, this.actualDiameters[i]);
@@ -826,11 +739,9 @@
 
                 if (value > this.maxDiameterTol) {
                     input.classList.add('error');
-                    // Auto-correct to max allowed
                     input.value = this.maxDiameterTol.toFixed(3);
                     this.actualDiameters[holeIndex] = this.maxDiameterTol;
                     
-                    // Remove error styling after a delay
                     setTimeout(() => {
                         input.classList.remove('error');
                     }, 1500);
@@ -839,7 +750,6 @@
                     this.actualDiameters[holeIndex] = value;
                 }
                 
-                // Revalidate max diameter tolerance
                 this.validateMaxDiameterTolerance();
                 this.calculate();
             }
@@ -851,14 +761,10 @@
                 
                 if (this.mmcEnabled) {
                     button.textContent = 'Disable MMC';
-                    button.classList.remove('disabled');
-                    settings.classList.remove('hidden');
                     settings.classList.add('visible');
                 } else {
                     button.textContent = 'Enable MMC';
-                    button.classList.add('disabled');
                     settings.classList.remove('visible');
-                    settings.classList.add('hidden');
                 }
                 
                 this.updatePositionInputs();
@@ -951,13 +857,11 @@
 
             calculate() {
                 try {
-                    // Validate inputs before calculation
                     if (this.truePosToleranceInput < 0.0001) {
                         console.warn('True position tolerance too small, skipping calculation');
                         return;
                     }
 
-                    // Calculate nominal positions
                     this.xNominal = [];
                     this.yNominal = [];
                     
@@ -969,10 +873,7 @@
                         this.yNominal.push(y);
                     }
 
-                    // Find optimal rotation
                     this.optimalAngle = this.findOptimalRotation();
-
-                    // Calculate hole results
                     this.holeResults = this.calculateHoleResults();
 
                     this.displayResults();
@@ -996,7 +897,6 @@
                     }
                 }
                 
-                // Fine-tune
                 const searchRange = 1.0;
                 const step = 0.001;
                 for (let angle = bestAngle - searchRange; angle <= bestAngle + searchRange; angle += step) {
@@ -1041,11 +941,9 @@
                 
                 if (this.mmcEnabled && holeIndex < this.actualDiameters.length) {
                     const bonusTolerance = this.maxDiameterTol - this.actualDiameters[holeIndex];
-                    // Ensure bonus tolerance is never negative
                     availableTolerance += Math.max(bonusTolerance, 0);
                 }
                 
-                // Ensure minimum tolerance to prevent visualization issues
                 return Math.max(availableTolerance, 0.0001);
             }
 
@@ -1126,54 +1024,43 @@
                 const centerX = visualSize / 2;
                 const centerY = visualSize / 2;
                 
-                // Calculate positions and angles for this hole
                 const holeIndex = result.holeNumber - 1;
                 const nominalAngle = holeIndex * 360 / this.boltHoles + 90;
                 const optimizedAngle = nominalAngle + this.optimalAngle;
                 
-                // Nominal positions (before and after rotation)
                 const xNominalBefore = 0.5 * this.bcd * Math.cos(nominalAngle * Math.PI / 180);
                 const yNominalBefore = 0.5 * this.bcd * Math.sin(nominalAngle * Math.PI / 180);
                 const xNominalAfter = 0.5 * this.bcd * Math.cos(optimizedAngle * Math.PI / 180);
                 const yNominalAfter = 0.5 * this.bcd * Math.sin(optimizedAngle * Math.PI / 180);
                 
-                // Actual position for this hole
                 const xActual = this.xActual[holeIndex];
                 const yActual = this.yActual[holeIndex];
                 
-                // The tolerance circle is always centered at the optimized position and has a fixed size
                 const toleranceRadiusDisplay = 40;
                 
-                // Calculate scale so that positions are scaled relative to the FULL tolerance
                 const fullTolerance = result.availableTolerance;
                 const safeTolerance = Math.max(fullTolerance, 0.0001);
                 
                 let positionScale = toleranceRadiusDisplay / safeTolerance;
                 
-                // Only limit scaling for very small tolerances
                 if (safeTolerance < 0.0001) {
                     const maxScale = 1000;
                     positionScale = Math.min(positionScale, maxScale);
                 }
                 
-                // Calculate positions relative to OPTIMIZED position (new center)
                 const actualRelativeX = xActual - xNominalAfter;
                 const actualRelativeY = yActual - yNominalAfter;
                 const originalNominalRelativeX = xNominalBefore - xNominalAfter;
                 const originalNominalRelativeY = yNominalBefore - yNominalAfter;
                 
-                // Transform actual position
                 const actualRelativeAngle = Math.atan2(actualRelativeY, actualRelativeX) * 180 / Math.PI;
                 const actualRelativeRadius = Math.sqrt(actualRelativeX * actualRelativeX + actualRelativeY * actualRelativeY);
                 
-                // Apply polar transformation
                 const transformedActualAngle = 90 - (actualRelativeAngle - nominalAngle);
                 
-                // Clear canvas with neutral background
                 ctx.fillStyle = '#374151';
                 ctx.fillRect(0, 0, visualSize, visualSize);
                 
-                // Draw crosshairs
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
                 ctx.lineWidth = 1;
                 ctx.setLineDash([]);
@@ -1184,7 +1071,6 @@
                 ctx.lineTo(centerX, visualSize);
                 ctx.stroke();
                 
-                // Draw tolerance circle (keeping this one for hole-by-hole visualization)
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
                 ctx.setLineDash([3, 3]);
                 ctx.lineWidth = 2;
@@ -1193,7 +1079,6 @@
                 ctx.arc(centerX, centerY, displayRadius, 0, 2 * Math.PI);
                 ctx.stroke();
                 
-                // Calculate display positions relative to optimized position
                 if (actualRelativeRadius > 0) {
                     const actualDeviation = 2 * actualRelativeRadius;
                     const actualDisplayRadius = actualDeviation * positionScale;
@@ -1213,7 +1098,6 @@
                         const frameRadius = visualSize / 2 - 10;
                         
                         if (actualDistanceFromCenter <= frameRadius) {
-                            // Position is within frame
                             ctx.strokeStyle = result.passesAfter ? '#10b981' : '#ef4444';
                             ctx.setLineDash([1, 2]);
                             ctx.lineWidth = 1;
@@ -1222,7 +1106,6 @@
                             ctx.lineTo(actualDisplayX, actualDisplayY);
                             ctx.stroke();
                             
-                            // Draw actual position point
                             ctx.fillStyle = '#ef4444';
                             ctx.strokeStyle = '#ffffff';
                             ctx.lineWidth = 1;
@@ -1232,12 +1115,10 @@
                             ctx.fill();
                             ctx.stroke();
                         } else {
-                            // Position is outside frame - draw arrow to edge
                             const angle = Math.atan2(actualDisplayY - centerY, actualDisplayX - centerX);
                             const edgeX = centerX + frameRadius * Math.cos(angle);
                             const edgeY = centerY + frameRadius * Math.sin(angle);
                             
-                            // Draw line to edge
                             ctx.strokeStyle = '#ef4444';
                             ctx.setLineDash([1, 2]);
                             ctx.lineWidth = 1;
@@ -1246,7 +1127,6 @@
                             ctx.lineTo(edgeX, edgeY);
                             ctx.stroke();
                             
-                            // Draw arrow pointing outward
                             const arrowLength = 8;
                             const arrowAngle = Math.PI / 6;
                             
@@ -1269,7 +1149,6 @@
                     }
                 }
                 
-                // Draw original nominal position relative to optimized position (if there's rotation)
                 if (Math.abs(this.optimalAngle) > 0.01) {
                     const originalNominalRelativeRadius = Math.sqrt(originalNominalRelativeX * originalNominalRelativeX + originalNominalRelativeY * originalNominalRelativeY);
                     
@@ -1295,7 +1174,6 @@
                             const frameRadius = visualSize / 2 - 10;
                             
                             if (originalNominalDistanceFromCenter <= frameRadius) {
-                                // Draw line from center to original nominal position
                                 ctx.strokeStyle = '#f59e0b';
                                 ctx.setLineDash([2, 2]);
                                 ctx.lineWidth = 1;
@@ -1304,7 +1182,6 @@
                                 ctx.lineTo(originalNominalDisplayX, originalNominalDisplayY);
                                 ctx.stroke();
                                 
-                                // Draw original nominal position point
                                 ctx.fillStyle = '#3b82f6';
                                 ctx.strokeStyle = '#ffffff';
                                 ctx.lineWidth = 1;
@@ -1318,7 +1195,6 @@
                     }
                 }
                 
-                // Draw optimized nominal position (center)
                 ctx.fillStyle = '#10b981';
                 ctx.strokeStyle = '#ffffff';
                 ctx.lineWidth = 2;
@@ -1328,7 +1204,6 @@
                 ctx.fill();
                 ctx.stroke();
                 
-                // Convert canvas to data URL and return as img element
                 const dataURL = canvas.toDataURL();
                 return `
                     <div class="tolerance-visual">
@@ -1338,7 +1213,6 @@
             }
 
             displayResults() {
-                // Update summary
                 document.getElementById('optimalRotation').textContent = `${this.optimalAngle.toFixed(4)}°`;
                 
                 const allPass = this.holeResults.every(result => result.passesAfter);
@@ -1348,14 +1222,12 @@
                 allHolesPassElement.textContent = allPass ? 'YES' : 'NO';
                 allHolesPassElement.style.color = allPass ? '#10b981' : '#ef4444';
                 
-                // Update summary background based on pass/fail status
                 if (allPass) {
                     resultsSummary.classList.remove('fail');
                 } else {
                     resultsSummary.classList.add('fail');
                 }
 
-                // Create tables
                 const tablesContainer = document.getElementById('dataTables');
                 
                 const resultTable = this.createResultTable();
@@ -1430,7 +1302,6 @@
                 
                 this.ctx.clearRect(0, 0, displayWidth, displayHeight);
 
-                // Calculate bounds and scaling
                 const allX = [...this.xActual, ...this.xNominal];
                 const allY = [...this.yActual, ...this.yNominal];
                 const maxCoord = Math.max(...allX.map(Math.abs), ...allY.map(Math.abs));
@@ -1440,10 +1311,8 @@
                 const centerY = displayHeight / 2;
                 const scale = Math.min(displayWidth, displayHeight) / (2 * maxR) * 0.85;
 
-                // Draw grid
                 this.drawGrid(centerX, centerY, scale, maxR, displayWidth, displayHeight);
 
-                // Draw bolt circle (solid line instead of dashed)
                 const circleR = (this.bcd / 2) * scale;
                 this.ctx.strokeStyle = '#6b7280';
                 this.ctx.setLineDash([]);
@@ -1452,14 +1321,12 @@
                 this.ctx.arc(centerX, centerY, circleR, 0, 2 * Math.PI);
                 this.ctx.stroke();
 
-                // Draw center point
                 this.ctx.fillStyle = '#6b7280';
                 this.ctx.setLineDash([]);
                 this.ctx.beginPath();
                 this.ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
                 this.ctx.fill();
 
-                // Draw holes and connections
                 for (let i = 0; i < this.boltHoles; i++) {
                     const nominalAngle = i * 360 / this.boltHoles + 90;
                     const rotatedAngle = nominalAngle + this.optimalAngle;
@@ -1472,7 +1339,6 @@
                     const cxOpt = centerX + (0.5 * this.bcd * Math.cos(rotatedAngle * Math.PI / 180)) * scale;
                     const cyOpt = centerY - (0.5 * this.bcd * Math.sin(rotatedAngle * Math.PI / 180)) * scale;
 
-                    // Draw rotation arrow (actual to optimized nominal) - solid line
                     this.ctx.strokeStyle = '#f59e0b';
                     this.ctx.setLineDash([]);
                     this.ctx.lineWidth = 2;
@@ -1481,7 +1347,6 @@
                     this.ctx.lineTo(cxOpt, cyOpt);
                     this.ctx.stroke();
 
-                    // Draw connection line (optimized nominal to actual) - solid line
                     this.ctx.strokeStyle = this.holeResults[i].passesAfter ? '#10b981' : '#ef4444';
                     this.ctx.setLineDash([]);
                     this.ctx.lineWidth = 1;
@@ -1490,10 +1355,8 @@
                     this.ctx.lineTo(cxAct, cyAct);
                     this.ctx.stroke();
 
-                    // Draw points
                     this.ctx.setLineDash([]);
                     
-                    // Nominal (blue)
                     this.ctx.fillStyle = '#3b82f6';
                     this.ctx.strokeStyle = '#f3f4f6';
                     this.ctx.lineWidth = 2;
@@ -1502,21 +1365,18 @@
                     this.ctx.fill();
                     this.ctx.stroke();
 
-                    // Actual (red)
                     this.ctx.fillStyle = '#ef4444';
                     this.ctx.beginPath();
                     this.ctx.arc(cxAct, cyAct, 8, 0, 2 * Math.PI);
                     this.ctx.fill();
                     this.ctx.stroke();
 
-                    // Optimized nominal (green)
                     this.ctx.fillStyle = '#10b981';
                     this.ctx.beginPath();
                     this.ctx.arc(cxOpt, cyOpt, 8, 0, 2 * Math.PI);
                     this.ctx.fill();
                     this.ctx.stroke();
 
-                    // Label
                     this.ctx.fillStyle = '#f3f4f6';
                     this.ctx.font = 'bold 14px Inter';
                     this.ctx.textAlign = 'center';
@@ -1531,7 +1391,6 @@
                 this.ctx.lineWidth = 1;
 
                 for (let i = -4; i <= 4; i++) {
-                    // Vertical lines
                     const xPos = centerX + i * gridSpacing * scale;
                     if (xPos >= 0 && xPos <= displayWidth) {
                         this.ctx.beginPath();
@@ -1540,7 +1399,6 @@
                         this.ctx.stroke();
                     }
 
-                    // Horizontal lines
                     const yPos = centerY + i * gridSpacing * scale;
                     if (yPos >= 0 && yPos <= displayHeight) {
                         this.ctx.beginPath();
@@ -1552,7 +1410,6 @@
             }
         }
 
-        // Initialize the analyzer when page loads
         document.addEventListener('DOMContentLoaded', () => {
             new AdvancedBoltPatternAnalyzer();
         });
