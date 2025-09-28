@@ -127,6 +127,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            position: relative;
         }
 
         .input-row label {
@@ -157,6 +158,27 @@
                 0 0 0 3px rgba(96, 165, 250, 0.2),
                 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(-1px);
+        }
+
+        .input-row input.error {
+            border-color: #ef4444;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 0 3px rgba(239, 68, 68, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .error-message {
+            position: absolute;
+            bottom: -25px;
+            right: 0;
+            color: #ef4444;
+            font-size: 0.75em;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: none;
+            white-space: nowrap;
         }
 
         .mmc-toggle {
@@ -218,6 +240,16 @@
             margin-bottom: 20px;
         }
 
+        .mmc-note {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .positions-grid {
             display: grid;
             gap: 15px;
@@ -246,6 +278,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
+            align-items: end;
         }
 
         .coordinate-inputs div {
@@ -257,6 +290,13 @@
         .coordinate-inputs label {
             font-size: clamp(11px, 2vw, 12px);
             color: #9ca3af;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            min-height: 2.4em;
+            display: flex;
+            align-items: flex-end;
         }
 
         .coordinate-inputs input {
@@ -390,57 +430,6 @@
             border-radius: 50%;
             background: #374151;
             border: 2px solid #6b7280;
-        }
-
-        .tolerance-visual .crosshair {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-        }
-
-        .tolerance-visual .crosshair::before,
-        .tolerance-visual .crosshair::after {
-            content: '';
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .tolerance-visual .crosshair::before {
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            transform: translateY(-50%);
-        }
-
-        .tolerance-visual .crosshair::after {
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            transform: translateX(-50%);
-        }
-
-        .tolerance-visual .deviation-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #f59e0b;
-            border: 2px solid white;
-            transform: translate(-50%, -50%);
-        }
-
-        .tolerance-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
         }
 
         .tolerance-stats {
@@ -639,7 +628,8 @@
                     </div>
                     <div class="input-row">
                         <label>True Position Tolerance:</label>
-                        <input type="number" id="truePosToleranceInput" value="0.0015" step="0.0001">
+                        <input type="number" id="truePosToleranceInput" value="0.0015" step="0.0001" min="0.0001">
+                        <div class="error-message" id="truePosError">Must be ≥ 0.0001</div>
                     </div>
                 </div>
 
@@ -652,10 +642,10 @@
                         <div class="input-row">
                             <label>Max Diameter Tolerance:</label>
                             <input type="number" id="maxDiameterTol" value="0.505" step="0.001">
+                            <div class="error-message" id="maxDiameterError">Must be larger than all hole diameters</div>
                         </div>
-                        <div class="input-row">
-                            <label>Min Diameter Tolerance:</label>
-                            <input type="number" id="minDiameterTol" value="0.495" step="0.001">
+                        <div class="mmc-note">
+                            Enter actual diameters for each hole below
                         </div>
                     </div>
                 </div>
@@ -731,7 +721,6 @@
                 this.truePosToleranceInput = 0.0015;
                 this.mmcEnabled = false;
                 this.maxDiameterTol = 0.505;
-                this.minDiameterTol = 0.495;
                 
                 this.xActual = [0.0, -2.175, 2.164];
                 this.yActual = [2.502, -1.253, -1.245];
@@ -759,8 +748,7 @@
                 });
 
                 document.getElementById('truePosToleranceInput').addEventListener('input', () => {
-                    this.truePosToleranceInput = parseFloat(document.getElementById('truePosToleranceInput').value) || 0.001;
-                    this.calculate();
+                    this.validateTruePositionTolerance();
                 });
 
                 document.getElementById('mmcButton').addEventListener('click', () => {
@@ -768,17 +756,91 @@
                 });
 
                 document.getElementById('maxDiameterTol').addEventListener('input', () => {
-                    this.maxDiameterTol = parseFloat(document.getElementById('maxDiameterTol').value) || 0.5;
-                    this.calculate();
-                });
-
-                document.getElementById('minDiameterTol').addEventListener('input', () => {
-                    this.minDiameterTol = parseFloat(document.getElementById('minDiameterTol').value) || 0.5;
-                    this.calculate();
+                    this.validateMaxDiameterTolerance();
                 });
 
                 window.addEventListener('resize', () => this.resizeCanvas());
                 this.resizeCanvas();
+            }
+
+            validateTruePositionTolerance() {
+                const input = document.getElementById('truePosToleranceInput');
+                const errorDiv = document.getElementById('truePosError');
+                const value = parseFloat(input.value);
+                
+                if (isNaN(value) || value < 0.0001) {
+                    input.classList.add('error');
+                    errorDiv.style.display = 'block';
+                    // Don't auto-correct, just show error
+                    return;
+                } else {
+                    input.classList.remove('error');
+                    errorDiv.style.display = 'none';
+                    this.truePosToleranceInput = value;
+                    this.calculate();
+                }
+            }
+
+            validateMaxDiameterTolerance() {
+                const input = document.getElementById('maxDiameterTol');
+                const errorDiv = document.getElementById('maxDiameterError');
+                const value = parseFloat(input.value);
+                
+                if (isNaN(value) || value <= 0) {
+                    input.classList.add('error');
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = 'Must be greater than 0';
+                    return;
+                }
+
+                // Check if any hole diameter exceeds this value
+                let maxHoleDiameter = 0;
+                for (let i = 0; i < this.actualDiameters.length; i++) {
+                    maxHoleDiameter = Math.max(maxHoleDiameter, this.actualDiameters[i]);
+                }
+
+                if (value <= maxHoleDiameter) {
+                    input.classList.add('error');
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = `Must be > ${maxHoleDiameter.toFixed(3)} (largest hole diameter)`;
+                    return;
+                }
+
+                input.classList.remove('error');
+                errorDiv.style.display = 'none';
+                this.maxDiameterTol = value;
+                this.calculate();
+            }
+
+            validateHoleDiameter(holeIndex) {
+                const input = document.getElementById(`d${holeIndex}`);
+                if (!input) return;
+                
+                const value = parseFloat(input.value);
+                
+                if (isNaN(value) || value <= 0) {
+                    input.classList.add('error');
+                    return;
+                }
+
+                if (value > this.maxDiameterTol) {
+                    input.classList.add('error');
+                    // Auto-correct to max allowed
+                    input.value = this.maxDiameterTol.toFixed(3);
+                    this.actualDiameters[holeIndex] = this.maxDiameterTol;
+                    
+                    // Remove error styling after a delay
+                    setTimeout(() => {
+                        input.classList.remove('error');
+                    }, 1500);
+                } else {
+                    input.classList.remove('error');
+                    this.actualDiameters[holeIndex] = value;
+                }
+                
+                // Revalidate max diameter tolerance
+                this.validateMaxDiameterTolerance();
+                this.calculate();
             }
 
             toggleMMC() {
@@ -799,6 +861,7 @@
                 }
                 
                 this.updatePositionInputs();
+                this.validateMaxDiameterTolerance();
                 this.calculate();
             }
 
@@ -847,7 +910,7 @@
                     const diameterInputs = this.mmcEnabled ? 
                         `<div>
                             <label>Actual Diameter:</label>
-                            <input type="number" id="d${i}" value="${this.actualDiameters[i].toFixed(3)}" step="0.001">
+                            <input type="number" id="d${i}" value="${this.actualDiameters[i].toFixed(3)}" step="0.001" min="0.001">
                         </div>` : 
                         ``;
                     
@@ -879,8 +942,7 @@
 
                     if (this.mmcEnabled) {
                         document.getElementById(`d${i}`).addEventListener('input', () => {
-                            this.actualDiameters[i] = parseFloat(document.getElementById(`d${i}`).value) || 0.5;
-                            this.calculate();
+                            this.validateHoleDiameter(i);
                         });
                     }
                 }
@@ -888,6 +950,12 @@
 
             calculate() {
                 try {
+                    // Validate inputs before calculation
+                    if (this.truePosToleranceInput < 0.0001) {
+                        console.warn('True position tolerance too small, skipping calculation');
+                        return;
+                    }
+
                     // Calculate nominal positions
                     this.xNominal = [];
                     this.yNominal = [];
@@ -972,10 +1040,12 @@
                 
                 if (this.mmcEnabled && holeIndex < this.actualDiameters.length) {
                     const bonusTolerance = this.maxDiameterTol - this.actualDiameters[holeIndex];
-                    availableTolerance += bonusTolerance;
+                    // Ensure bonus tolerance is never negative
+                    availableTolerance += Math.max(bonusTolerance, 0);
                 }
                 
-                return availableTolerance;
+                // Ensure minimum tolerance to prevent visualization issues
+                return Math.max(availableTolerance, 0.0001);
             }
 
             calculateHoleResults() {
@@ -987,7 +1057,7 @@
                     const availableTolerance = this.getAvailableTolerance(i);
                     
                     const bonusTolerance = this.mmcEnabled ? 
-                        this.maxDiameterTol - this.actualDiameters[i] : 0;
+                        Math.max(this.maxDiameterTol - this.actualDiameters[i], 0) : 0;
                     
                     const passesBefore = deviationBefore <= availableTolerance;
                     const passesAfter = deviationAfter <= availableTolerance;
@@ -1009,6 +1079,15 @@
                 return results;
             }
 
+            formatPercentage(value) {
+                const absValue = Math.abs(value);
+                if (absValue >= 1000) {
+                    return value.toExponential(3) + '%';
+                } else {
+                    return value.toFixed(4) + '%';
+                }
+            }
+
             updateToleranceIndicators() {
                 const container = document.getElementById('toleranceIndicators');
                 container.innerHTML = '';
@@ -1023,6 +1102,8 @@
                         <h5>Hole ${result.holeNumber}</h5>
                         ${visual}
                         <div class="tolerance-stats">
+                            <div>Dev: ${result.deviationAfter.toFixed(4)}</div>
+                            <div>Tol: ${result.availableTolerance.toFixed(4)}</div>
                             <div class="status ${result.passesAfter ? 'pass' : 'fail'}">
                                 ${result.passesAfter ? '✓ PASS' : '✗ FAIL'}
                             </div>
@@ -1035,10 +1116,6 @@
 
             createToleranceVisual(result) {
                 const visualSize = 120;
-                const centerX = visualSize / 2;
-                const centerY = visualSize / 2;
-                
-                // Create a canvas for this hole's visualization
                 const canvas = document.createElement('canvas');
                 canvas.width = visualSize;
                 canvas.height = visualSize;
@@ -1047,25 +1124,51 @@
                 canvas.style.borderRadius = '50%';
                 
                 const ctx = canvas.getContext('2d');
+                const centerX = visualSize / 2;
+                const centerY = visualSize / 2;
                 
-                // Calculate positions for this hole
+                // Calculate positions and angles for this hole
                 const holeIndex = result.holeNumber - 1;
                 const nominalAngle = holeIndex * 360 / this.boltHoles + 90;
-                const rotatedAngle = nominalAngle + this.optimalAngle;
+                const optimizedAngle = nominalAngle + this.optimalAngle;
                 
-                // Calculate nominal positions (before and after rotation)
+                // Nominal positions (before and after rotation)
                 const xNominalBefore = 0.5 * this.bcd * Math.cos(nominalAngle * Math.PI / 180);
                 const yNominalBefore = 0.5 * this.bcd * Math.sin(nominalAngle * Math.PI / 180);
-                const xNominalAfter = 0.5 * this.bcd * Math.cos(rotatedAngle * Math.PI / 180);
-                const yNominalAfter = 0.5 * this.bcd * Math.sin(rotatedAngle * Math.PI / 180);
+                const xNominalAfter = 0.5 * this.bcd * Math.cos(optimizedAngle * Math.PI / 180);
+                const yNominalAfter = 0.5 * this.bcd * Math.sin(optimizedAngle * Math.PI / 180);
                 
                 // Actual position for this hole
                 const xActual = this.xActual[holeIndex];
                 const yActual = this.yActual[holeIndex];
                 
-                // Calculate scale based on tolerance zone - make tolerance circle about 60% of visual size
-                const toleranceRadius = result.availableTolerance / 2; // True position is diameter
-                const scale = (visualSize * 0.3) / toleranceRadius;
+                // The tolerance circle is always centered at the optimized position and has a fixed size
+                const toleranceRadiusDisplay = 40;
+                
+                // Calculate scale so that positions are scaled relative to the FULL tolerance
+                const fullTolerance = result.availableTolerance;
+                const safeTolerance = Math.max(fullTolerance, 0.0001);
+                
+                let positionScale = toleranceRadiusDisplay / safeTolerance;
+                
+                // Only limit scaling for very small tolerances
+                if (safeTolerance < 0.001) {
+                    const maxScale = 1000;
+                    positionScale = Math.min(positionScale, maxScale);
+                }
+                
+                // Calculate positions relative to OPTIMIZED position (new center)
+                const actualRelativeX = xActual - xNominalAfter;
+                const actualRelativeY = yActual - yNominalAfter;
+                const originalNominalRelativeX = xNominalBefore - xNominalAfter;
+                const originalNominalRelativeY = yNominalBefore - yNominalAfter;
+                
+                // Transform actual position
+                const actualRelativeAngle = Math.atan2(actualRelativeY, actualRelativeX) * 180 / Math.PI;
+                const actualRelativeRadius = Math.sqrt(actualRelativeX * actualRelativeX + actualRelativeY * actualRelativeY);
+                
+                // Apply polar transformation
+                const transformedActualAngle = 90 - (actualRelativeAngle - nominalAngle);
                 
                 // Clear canvas with neutral background
                 ctx.fillStyle = '#374151';
@@ -1082,156 +1185,149 @@
                 ctx.lineTo(centerX, visualSize);
                 ctx.stroke();
                 
-                // Draw tolerance circle (centered at optimized nominal position)
-                const tolCircleRadius = toleranceRadius * scale;
+                // Draw tolerance circle
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
                 ctx.setLineDash([3, 3]);
                 ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, tolCircleRadius, 0, 2 * Math.PI);
+                const displayRadius = Math.max(toleranceRadiusDisplay, 5);
+                ctx.arc(centerX, centerY, displayRadius, 0, 2 * Math.PI);
                 ctx.stroke();
                 
-                // Calculate relative positions from optimized nominal
-                const relativeActualX = (xActual - xNominalAfter) * scale;
-                const relativeActualY = -(yActual - yNominalAfter) * scale;
-                const relativeNominalBeforeX = (xNominalBefore - xNominalAfter) * scale;
-                const relativeNominalBeforeY = -(yNominalBefore - yNominalAfter) * scale;
-                
-                // Check if actual position is within frame
-                const actualPosX = centerX + relativeActualX;
-                const actualPosY = centerY + relativeActualY;
-                const frameRadius = visualSize / 2 - 10;
-                const actualDistanceFromCenter = Math.sqrt(relativeActualX * relativeActualX + relativeActualY * relativeActualY);
-                
-                // Draw connection line from center to actual position (or to edge if outside)
-                if (actualDistanceFromCenter <= frameRadius) {
-                    // Position is within frame - draw normal line
-                    ctx.strokeStyle = result.passesAfter ? '#10b981' : '#ef4444';
-                    ctx.setLineDash([1, 2]);
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.lineTo(actualPosX, actualPosY);
-                    ctx.stroke();
-                } else {
-                    // Position is outside frame - draw line to edge and arrow
-                    const angle = Math.atan2(relativeActualY, relativeActualX);
-                    const edgeX = centerX + frameRadius * Math.cos(angle);
-                    const edgeY = centerY + frameRadius * Math.sin(angle);
+                // Calculate display positions relative to optimized position
+                if (actualRelativeRadius > 0) {
+                    const actualDeviation = 2 * actualRelativeRadius;
+                    const actualDisplayRadius = actualDeviation * positionScale;
                     
-                    // Draw line to edge
-                    ctx.strokeStyle = result.passesAfter ? '#10b981' : '#ef4444';
-                    ctx.setLineDash([1, 2]);
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.lineTo(edgeX, edgeY);
-                    ctx.stroke();
+                    const maxRenderRadius = visualSize / 2 - 5;
                     
-                    // Draw arrow pointing outward
-                    const arrowLength = 8;
-                    const arrowAngle = Math.PI / 6; // 30 degrees
+                    if (actualDisplayRadius <= maxRenderRadius) {
+                        const safeTransformedAngle = isNaN(transformedActualAngle) ? 0 : transformedActualAngle;
+                        const actualDisplayX = centerX + actualDisplayRadius * Math.cos(safeTransformedAngle * Math.PI / 180);
+                        const actualDisplayY = centerY - actualDisplayRadius * Math.sin(safeTransformedAngle * Math.PI / 180);
                     
-                    ctx.strokeStyle = '#ef4444';
-                    ctx.setLineDash([]);
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(edgeX, edgeY);
-                    ctx.lineTo(
-                        edgeX - arrowLength * Math.cos(angle - arrowAngle),
-                        edgeY - arrowLength * Math.sin(angle - arrowAngle)
-                    );
-                    ctx.moveTo(edgeX, edgeY);
-                    ctx.lineTo(
-                        edgeX - arrowLength * Math.cos(angle + arrowAngle),
-                        edgeY - arrowLength * Math.sin(angle + arrowAngle)
-                    );
-                    ctx.stroke();
+                        const actualDistanceFromCenter = Math.sqrt(
+                            (actualDisplayX - centerX) * (actualDisplayX - centerX) +
+                            (actualDisplayY - centerY) * (actualDisplayY - centerY)
+                        );
+                        
+                        const frameRadius = visualSize / 2 - 10;
+                        
+                        if (actualDistanceFromCenter <= frameRadius) {
+                            // Position is within frame
+                            ctx.strokeStyle = result.passesAfter ? '#10b981' : '#ef4444';
+                            ctx.setLineDash([1, 2]);
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.lineTo(actualDisplayX, actualDisplayY);
+                            ctx.stroke();
+                            
+                            // Draw actual position point
+                            ctx.fillStyle = '#ef4444';
+                            ctx.strokeStyle = '#ffffff';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([]);
+                            ctx.beginPath();
+                            ctx.arc(actualDisplayX, actualDisplayY, 5, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.stroke();
+                        } else {
+                            // Position is outside frame - draw arrow to edge
+                            const angle = Math.atan2(actualDisplayY - centerY, actualDisplayX - centerX);
+                            const edgeX = centerX + frameRadius * Math.cos(angle);
+                            const edgeY = centerY + frameRadius * Math.sin(angle);
+                            
+                            // Draw line to edge
+                            ctx.strokeStyle = '#ef4444';
+                            ctx.setLineDash([1, 2]);
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.lineTo(edgeX, edgeY);
+                            ctx.stroke();
+                            
+                            // Draw arrow pointing outward
+                            const arrowLength = 8;
+                            const arrowAngle = Math.PI / 6;
+                            
+                            ctx.strokeStyle = '#ef4444';
+                            ctx.setLineDash([]);
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.moveTo(edgeX, edgeY);
+                            ctx.lineTo(
+                                edgeX - arrowLength * Math.cos(angle - arrowAngle),
+                                edgeY - arrowLength * Math.sin(angle - arrowAngle)
+                            );
+                            ctx.moveTo(edgeX, edgeY);
+                            ctx.lineTo(
+                                edgeX - arrowLength * Math.cos(angle + arrowAngle),
+                                edgeY - arrowLength * Math.sin(angle + arrowAngle)
+                            );
+                            ctx.stroke();
+                        }
+                    }
                 }
                 
-                // Check if original nominal position is within frame
-                const nominalPosX = centerX + relativeNominalBeforeX;
-                const nominalPosY = centerY + relativeNominalBeforeY;
-                const nominalDistanceFromCenter = Math.sqrt(relativeNominalBeforeX * relativeNominalBeforeX + relativeNominalBeforeY * relativeNominalBeforeY);
-                
-                // Draw rotation indication if there's significant rotation
+                // Draw original nominal position relative to optimized position (if there's rotation)
                 if (Math.abs(this.optimalAngle) > 0.01) {
-                    if (nominalDistanceFromCenter <= frameRadius) {
-                        // Original nominal is within frame
-                        ctx.strokeStyle = '#f59e0b';
-                        ctx.setLineDash([2, 2]);
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(nominalPosX, nominalPosY);
-                        ctx.lineTo(centerX, centerY);
-                        ctx.stroke();
+                    const originalNominalRelativeRadius = Math.sqrt(originalNominalRelativeX * originalNominalRelativeX + originalNominalRelativeY * originalNominalRelativeY);
+                    
+                    if (originalNominalRelativeRadius > 0) {
+                        const originalNominalRelativeAngle = Math.atan2(originalNominalRelativeY, originalNominalRelativeX) * 180 / Math.PI;
+                        const transformedOriginalNominalAngle = 90 - (originalNominalRelativeAngle - nominalAngle);
                         
-                        // Draw original nominal position
-                        ctx.fillStyle = '#3b82f6';
-                        ctx.strokeStyle = '#ffffff';
-                        ctx.lineWidth = 1;
-                        ctx.setLineDash([]);
-                        ctx.beginPath();
-                        ctx.arc(nominalPosX, nominalPosY, 4, 0, 2 * Math.PI);
-                        ctx.fill();
-                        ctx.stroke();
-                    } else {
-                        // Original nominal is outside frame - draw arrow
-                        const angle = Math.atan2(relativeNominalBeforeY, relativeNominalBeforeX);
-                        const edgeX = centerX + frameRadius * Math.cos(angle);
-                        const edgeY = centerY + frameRadius * Math.sin(angle);
+                        const originalNominalDeviation = 2 * originalNominalRelativeRadius;
+                        const originalNominalDisplayRadius = originalNominalDeviation * positionScale;
                         
-                        // Draw line to edge
-                        ctx.strokeStyle = '#f59e0b';
-                        ctx.setLineDash([2, 2]);
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(centerX, centerY);
-                        ctx.lineTo(edgeX, edgeY);
-                        ctx.stroke();
+                        const maxRenderRadius = visualSize / 2 - 5;
                         
-                        // Draw arrow pointing outward
-                        const arrowLength = 8;
-                        const arrowAngle = Math.PI / 6;
+                        if (originalNominalDisplayRadius <= maxRenderRadius) {
+                            const safeTransformedOriginalAngle = isNaN(transformedOriginalNominalAngle) ? 0 : transformedOriginalNominalAngle;
+                            const originalNominalDisplayX = centerX + originalNominalDisplayRadius * Math.cos(safeTransformedOriginalAngle * Math.PI / 180);
+                            const originalNominalDisplayY = centerY - originalNominalDisplayRadius * Math.sin(safeTransformedOriginalAngle * Math.PI / 180);
                         
-                        ctx.strokeStyle = '#f59e0b';
-                        ctx.setLineDash([]);
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.moveTo(edgeX, edgeY);
-                        ctx.lineTo(
-                            edgeX - arrowLength * Math.cos(angle - arrowAngle),
-                            edgeY - arrowLength * Math.sin(angle - arrowAngle)
-                        );
-                        ctx.moveTo(edgeX, edgeY);
-                        ctx.lineTo(
-                            edgeX - arrowLength * Math.cos(angle + arrowAngle),
-                            edgeY - arrowLength * Math.sin(angle + arrowAngle)
-                        );
-                        ctx.stroke();
+                            const originalNominalDistanceFromCenter = Math.sqrt(
+                                (originalNominalDisplayX - centerX) * (originalNominalDisplayX - centerX) +
+                                (originalNominalDisplayY - centerY) * (originalNominalDisplayY - centerY)
+                            );
+                            
+                            const frameRadius = visualSize / 2 - 10;
+                            
+                            if (originalNominalDistanceFromCenter <= frameRadius) {
+                                // Draw line from center to original nominal position
+                                ctx.strokeStyle = '#f59e0b';
+                                ctx.setLineDash([2, 2]);
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(centerX, centerY);
+                                ctx.lineTo(originalNominalDisplayX, originalNominalDisplayY);
+                                ctx.stroke();
+                                
+                                // Draw original nominal position point
+                                ctx.fillStyle = '#3b82f6';
+                                ctx.strokeStyle = '#ffffff';
+                                ctx.lineWidth = 1;
+                                ctx.setLineDash([]);
+                                ctx.beginPath();
+                                ctx.arc(originalNominalDisplayX, originalNominalDisplayY, 4, 0, 2 * Math.PI);
+                                ctx.fill();
+                                ctx.stroke();
+                            }
+                        }
                     }
                 }
                 
                 // Draw optimized nominal position (center)
                 ctx.fillStyle = '#10b981';
                 ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 1;
+                ctx.lineWidth = 2;
                 ctx.setLineDash([]);
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, 4, 0, 2 * Math.PI);
                 ctx.fill();
                 ctx.stroke();
-                
-                // Draw actual position (only if within frame)
-                if (actualDistanceFromCenter <= frameRadius) {
-                    ctx.fillStyle = '#ef4444';
-                    ctx.strokeStyle = '#ffffff';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.arc(actualPosX, actualPosY, 5, 0, 2 * Math.PI);
-                    ctx.fill();
-                    ctx.stroke();
-                }
                 
                 // Convert canvas to data URL and return as img element
                 const dataURL = canvas.toDataURL();
@@ -1321,7 +1417,7 @@
                     table += `<td>${result.deviationBefore.toFixed(4)}</td>`;
                     table += `<td>${result.deviationAfter.toFixed(4)}</td>`;
                     table += `<td>${result.improvement.toFixed(4)}</td>`;
-                    table += `<td>${improvementPercent.toFixed(4)}%</td>`;
+                    table += `<td>${this.formatPercentage(improvementPercent)}</td>`;
                     table += `</tr>`;
                 });
 
